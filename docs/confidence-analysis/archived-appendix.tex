@@ -1,0 +1,63 @@
+\section{Archived hardware confidence audit}
+\label{app:hardware-confidence}
+The archived data comprise 152 W-state runs and 15 higher-excitation Dicke
+runs. The 30 tabulated results match the archived excitation numbers,
+system sizes, energies, and execution dates. The runtime metadata of all
+152 W-state jobs record measurement-error mitigation and measurement
+twirling as enabled; those of all 15 higher-excitation Dicke jobs record
+both as disabled. Gate twirling, dynamical decoupling, zero-noise
+extrapolation, and probabilistic error cancellation are disabled in all
+167 jobs. The configured shot counts are 16384 (W, divided among 32
+measurement-twirling randomizations) and 16000 (higher excitation, one
+randomization); the runtime options apply this count to each
+measurement-basis configuration. The archived results record these
+configured options but not the executed basis-resolved circuits or
+outcomes. The W-state results
+select the lowest measured energy at each size. Figure~\ref{fig:W_experiment}
+shows the runtime-reported uncertainty of the selected result.
+For the unmitigated results we evaluate the range-only bound in
+Appendix~\ref{app:resources}. With $N_b=N_0$, let $R_b$ be the range of
+the per-shot basis score. Conditional on independent preparations,
+trusted ideal Pauli measurements, and $N_0$ shots in each of the three
+separately sampled bases, define
+\begin{equation}
+ E_U=\widehat E+
+ \sqrt{\frac{R_X^2+R_Y^2+R_Z^2}{2N_0}\ln\frac{167}{0.05}}.
+\end{equation}
+For each unmitigated result, Hoeffding's inequality then gives
+$\Pr\{E>E_U\}\le0.05/167$ for its true energy $E$. A union bound therefore gives simultaneous coverage
+of at least $95\%$ for all 15 higher-excitation results. The denominator
+167 includes the full archived collection and accounts for selection
+within it. The union bound permits dependence between runs. Its coverage
+is restricted to the archived collection and the stated sampling model;
+selection from additional trials would require a corresponding adjustment.
+The calculation takes the configured shot allocation, $N_0=16000$ per
+homogeneous basis, as the executed sampling model, which the archived
+records do not independently confirm, and assumes ideal readout. Assessing readout bias or mitigated W-state results requires
+an error model beyond these assumptions.
+
+For the four passing higher-excitation runs the conditional bounds are:
+\begin{center}
+\begin{tabular}{ccccc}
+$n$ & $k$ & $\widehat E$ & $E_U$ & $1-\alpha$\\\hline
+4 & 2 & 0.136078 & 0.188890 & 0.333333\\
+5 & 2 & 0.138325 & 0.265433 & 0.400000\\
+4 & 3 & 0.078969 & 0.212253 & 0.250000\\
+5 & 3 & 0.151250 & 0.278358 & 0.400000\\
+\end{tabular}
+\end{center}
+Both higher-excitation families also retain positive conditional fidelity
+bounds $\max\{0,1-E_U\}$ through eight qubits. No larger archived member
+passes this range-only positivity test. A failed test leaves entanglement undetermined. At seven qubits the $k=2,3$ upper bounds are respectively
+$0.623486$ and $0.528390$, exceeding their witness thresholds $2/7$ and
+$3/7$. Thus the seven-qubit point-estimate crossings are not promoted to
+finite-confidence GME claims here.
+
+The available data contain aggregate energy uncertainties. The confidence
+bounds above use the recorded shot counts and the possible ranges of the
+measurement scores. Basis-resolved outcome statistics would be needed to
+evaluate their empirical variances. The six- and seven-qubit
+higher-excitation crossings and all W-state crossings are therefore
+reported as point estimates under the present analysis.
+The audit script, all-run and table-matched CSV files, and input hashes
+are supplied in the revision's source supplement under \texttt{pra\_confidence\_20261013/analysis/} and \texttt{pra\_confidence\_20261013/audit-results/}.

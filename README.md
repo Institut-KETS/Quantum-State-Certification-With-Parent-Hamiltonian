@@ -71,3 +71,7 @@ https://doi.org/10.48550/arXiv.2603.04499
   doi     = {10.48550/arXiv.2603.04499}
 }
 ```
+
+## Statistical analysis of archived hardware results
+
+The [confidence-analysis documentation](docs/confidence-analysis/README.md) contains the conditional Hoeffding analysis, assumptions, results, and calculation inputs for the archived jobs. This material was moved out of the PRA manuscript's former Appendix F. It includes no new hardware measurements.
